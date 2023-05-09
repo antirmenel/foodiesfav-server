@@ -13,6 +13,12 @@ app.use(
 );
 app.use(router);
 
+// error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
+
 app.listen(port, () => {
   console.log(`The server is started at port number :${port}`);
 });
