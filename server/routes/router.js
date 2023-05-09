@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 // connect to MongoDB
 mongoose
   .connect(
-    "mongodb+srv://Menel:YYDn8KyxQN4o9A5s@foodiesfav.v5a3bbd.mongodb.net/?retryWrites=true&w=majority",
+    process.env.MONGODB_URI,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -56,8 +56,8 @@ router.post("/register", async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "antirmenel@gmail.com",
-        pass: "rcbpjajswvravghf",
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
       },
     });
 
