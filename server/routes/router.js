@@ -1,5 +1,4 @@
-require('dotenv').config();
-
+require("dotenv").config();
 const express = require("express");
 const router = new express.Router();
 const nodemailer = require("nodemailer");
@@ -7,16 +6,20 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // connect to MongoDB
-mongoose.connect("mongodb+srv://Menel:YYDn8KyxQN4o9A5s@foodiesfav.v5a3bbd.mongodb.net/?retryWrites=true&w=majority", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => {
-  console.log("MongoDB database connection established successfully");
-})
-.catch((err) => {
-  console.log("Error connecting to the database: ", err);
-});
+mongoose
+  .connect(
+    "mongodb+srv://Menel:YYDn8KyxQN4o9A5s@foodiesfav.v5a3bbd.mongodb.net/?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => {
+    console.log("MongoDB database connection established successfully");
+  })
+  .catch((err) => {
+    console.log("Error connecting to the database: ", err);
+  });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -41,12 +44,20 @@ router.post("/register", async (req, res) => {
   const { email } = req.body;
 
   try {
+    // check if email is already subscribed
+    const existingEmail = await Email.findOne({ email });
+    if (existingEmail) {
+      return res
+        .status(400)
+        .json({ status: 400, message: "Email already subscribed" });
+    }
+
     // create transporter
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
+        user: "antirmenel@gmail.com",
+        pass: "rcbpjajswvravghf",
       },
     });
 
