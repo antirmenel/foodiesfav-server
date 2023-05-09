@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const express = require("express");
 const router = new express.Router();
 const nodemailer = require("nodemailer");
@@ -6,17 +7,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // connect to MongoDB
-mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("MongoDB database connection established successfully");
-  })
-  .catch((err) => {
-    console.log("Error connecting to the database: ", err);
-  });
+mongoose.connect("mongodb+srv://Menel:YYDn8KyxQN4o9A5s@foodiesfav.v5a3bbd.mongodb.net/?retryWrites=true&w=majority", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log("MongoDB database connection established successfully");
+})
+.catch((err) => {
+  console.log("Error connecting to the database: ", err);
+});
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -84,6 +84,5 @@ router.post("/register", async (req, res) => {
     res.status(401).json({ status: 401, error });
   }
 });
-console.log(process.env.MONGODB_URI);
 
 module.exports = router;
