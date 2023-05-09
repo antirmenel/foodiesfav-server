@@ -24,7 +24,6 @@ const Email = mongoose.model("Email", emailSchema);
 // send mail and store email in database
 router.post("/register", async (req, res) => {
   const { email } = req.body;
-
   try {
     const existingEmail = await Email.findOne({ email });
     if (existingEmail) {
