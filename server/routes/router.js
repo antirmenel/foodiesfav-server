@@ -83,5 +83,6 @@ router.post("/register", async (req, res) => {
     res.status(401).json({ status: 401, error });
   }
 });
+console.log(process.env.MONGODB_URI);
 
 module.exports = router;
