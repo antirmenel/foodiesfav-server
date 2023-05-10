@@ -1,0 +1,25 @@
+routes:
+  - src: /about
+    dest: /about.html
+    type: rewrite
+  - src: /privacy
+    dest: /privacy.html
+    type: rewrite
+  - src: /recipe/:id
+    dest: /index.html
+    type: rewrite
+  - src: /recipes
+    dest: /index.html
+    type: rewrite
+  - src: /occasions
+    dest: /index.html
+    type: rewrite
+  - src: /quick
+    dest: /index.html
+    type: rewrite
+  - src: /trends
+    dest: /index.html
+    type: rewrite
+  - src: /*
+    dest: /index.html
+    type: rewrite
