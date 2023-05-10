@@ -44,6 +44,7 @@ router.post("/register", async (req, res) => {
 
     const emailDoc = new Email({ email });
     await emailDoc.save();
+    console.log("Email saved to database");
 
     await sgMail.send(msg);
 
